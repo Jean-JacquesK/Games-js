@@ -1,0 +1,13 @@
+:root {
+  --background: hwb(0 1% 99% / 0.068);
+  --color: #263a42;
+  --itemsBackground: rgb(255, 255, 255);
+  --itemsColor: var(--color);
+}
+
+[data-theme="darkTheme"] {
+  --background: #191b33;
+  --color: #dfdfdf;
+  --itemsBackground: #252a4b;
+  --itemsColor: var(--color);
+}
