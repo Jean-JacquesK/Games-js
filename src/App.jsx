@@ -2,19 +2,10 @@ import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Genre } from "./components/Genre/Genre";
 import { GamesList } from "./components/Games/GamesList";
-import { fetchGames } from "./utils/Api";
+import { fetchGames } from "./utils/fetchAPI/Api";
 
 function App() {
   const [dark, setDark] = useState(false);
-  const [games, setGames] = useState([]);
-
-  useEffect(() => {
-    return () => {
-      fetchGames().then((res) => {
-        setGames(res);
-      });
-    };
-  }, []);
 
   return (
     <div
@@ -25,7 +16,7 @@ function App() {
       <Navbar dark={dark} setDark={setDark} />
       <div className='d-flex justify-content-around flex-wrap'>
         <Genre />
-        <GamesList games={games} />
+        <GamesList />
       </div>
     </div>
   );
