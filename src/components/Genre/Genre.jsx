@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { fetchGamesGenres } from "../../utils/fetchAPI/Api";
 import { Spinner } from "../../utils/ui/Spinner";
+import { GenreItem } from "./GenreItem";
 
 export function Genre() {
   const {
@@ -35,18 +36,7 @@ export function Genre() {
         }}
       >
         {genres.map((genre) => {
-          return (
-            <li
-              key={genre.id}
-              className='list-group-item list-group-item-hover'
-              style={{
-                background: "var(--itemsBackground)",
-                color: "var(--itemsColor)",
-              }}
-            >
-              {genre.name}
-            </li>
-          );
+          return <GenreItem key={genre.id} genre={genre} />;
         })}
       </ul>
     </div>
