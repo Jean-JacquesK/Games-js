@@ -1,4 +1,24 @@
+import { useQuery } from "react-query";
+import { fetchGamesGenres } from "../../utils/fetchAPI/Api";
+import { Spinner } from "../../utils/ui/Spinner";
+
 export function Genre() {
+  const {
+    data: genres,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["genre"],
+    queryFn: fetchGamesGenres,
+  });
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <h3>Erreur : {error.toString()} </h3>;
+  }
   return (
     <div
       className='mx-2'
@@ -14,60 +34,20 @@ export function Genre() {
           color: "var(--itemsColor)",
         }}
       >
-        <li
-          className='list-group-item list-group-item-hover'
-          style={{
-            background: "var(--itemsBackground)",
-            color: "var(--itemsColor)",
-          }}
-        >
-          Action
-        </li>
-        <li
-          className='list-group-item list-group-item-hover'
-          style={{
-            background: "var(--itemsBackground)",
-            color: "var(--itemsColor)",
-          }}
-        >
-          Adventure
-        </li>
-        <li
-          className='list-group-item list-group-item-hover'
-          style={{
-            background: "var(--itemsBackground)",
-            color: "var(--itemsColor)",
-          }}
-        >
-          RPG
-        </li>
-        <li
-          className='list-group-item list-group-item-hover'
-          style={{
-            background: "var(--itemsBackground)",
-            color: "var(--itemsColor)",
-          }}
-        >
-          Shooter
-        </li>
-        <li
-          className='list-group-item list-group-item-hover'
-          style={{
-            background: "var(--itemsBackground)",
-            color: "var(--itemsColor)",
-          }}
-        >
-          Simulation
-        </li>
-        <li
-          className='list-group-item list-group-item-hover'
-          style={{
-            background: "var(--itemsBackground)",
-            color: "var(--itemsColor)",
-          }}
-        >
-          Arcade
-        </li>
+        {genres.map((genre) => {
+          return (
+            <li
+              key={genre.id}
+              className='list-group-item list-group-item-hover'
+              style={{
+                background: "var(--itemsBackground)",
+                color: "var(--itemsColor)",
+              }}
+            >
+              {genre.name}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

@@ -13,6 +13,13 @@ export const fetchSearchGames = async (query) => {
     }`
   );
   const data = await response.json();
-  console.log(data);
+  return data.results;
+};
+
+export const fetchGamesGenres = async () => {
+  const response = await fetch(
+    `https://api.rawg.io/api/genres?key=${import.meta.env.VITE_GAME_KEY}`
+  );
+  const data = await response.json();
   return data.results;
 };
