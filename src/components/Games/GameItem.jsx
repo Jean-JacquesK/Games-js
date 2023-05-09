@@ -15,7 +15,7 @@ export function GameItem({ game }) {
       >
         <img
           src={game.background_image}
-          alt='game name'
+          alt={game.name}
           className='card-img-top w-100 h-50'
         />
         <div className='card-body'>

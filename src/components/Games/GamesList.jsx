@@ -1,12 +1,21 @@
 import { useQuery } from "react-query";
 import { GameItem } from "./GameItem";
-import { fetchGames } from "../../utils/fetchAPI/Api";
+import { fetchGames, fetchSearchGames } from "../../utils/fetchAPI/Api";
 import { Spinner } from "../../utils/ui/Spinner";
 
-export function GamesList() {
-  const { data, isLoading, error } = useQuery({
+export function GamesList({ searchGames }) {
+  const {
+    data: games,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["games"],
     queryFn: fetchGames,
+  });
+
+  const { data: searchedGames } = useQuery({
+    queryKey: ["SearchGames", searchGames],
+    queryFn: () => fetchSearchGames(searchGames),
   });
 
   if (isLoading) {
@@ -16,12 +25,9 @@ export function GamesList() {
   if (error) {
     return <h3>Erreur : {error.toString()} </h3>;
   }
-  if (!data) {
-    return <h4>Oups.. Nous rencontrons un problème</h4>;
-  }
 
   return (
-    <div className='m-2' style={{ width: "80%" }}>
+    <div className='m-2' style={{ width: "85%" }}>
       <h1 className='mx-2'>Games category</h1>
       <div className='mx-2'>
         <select
@@ -38,7 +44,7 @@ export function GamesList() {
         </select>
       </div>
       <div className='m-1 d-flex flex-wrap justify-content-start'>
-        {data.map((game) => {
+        {searchedGames?.map((game) => {
           return <GameItem key={game.id} game={game} />;
         })}
       </div>

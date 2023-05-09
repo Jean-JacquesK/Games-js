@@ -1,6 +1,6 @@
 export const Spinner = () => {
   return (
-    <div className='d-flex justify-content-start' style={{ width: "80%" }}>
+    <div className='d-flex justify-content-center' style={{ width: "80%" }}>
       <div role='status'>
         <div
           className='spinner-border'
